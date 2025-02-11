@@ -1,0 +1,40 @@
+<section class="flex bg-gray-900 text-white p-2 justify-between items-center">
+  <!-- Logo Image -->
+  <img
+    src="https://static.vecteezy.com/system/resources/previews/006/547/185/non_2x/creative-modern-abstract-ecommerce-logo-design-colorful-gradient-online-shopping-bag-logo-design-template-free-vector.jpg"
+    class="w-10 h-8 rounded-sm"
+    alt="Logo"
+  />
+
+  <!-- Navigation Links -->
+  <div>
+    <ul class="flex justify-between min-w-96 font-mono items-center">
+      <li class="cursor-pointer hover:border-b">
+        <a routerLink="/" routerLinkActive="active">Home</a>
+      </li>
+      <li class="cursor-pointer hover:border-b">
+        <a routerLink="/products" routerLinkActive="active">Products</a>
+      </li>
+      <li class="cursor-pointer hover:border-b">
+        <a routerLink="/about" routerLinkActive="active">About</a>
+      </li>
+      <li class="cursor-pointer hover:border-b">
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      </li>
+      <li class="cursor-pointer hover:border-b">
+        <a (click)="toggleCart()"><i class="fa-solid fa-cart-shopping"></i></a>
+      </li>
+
+      <!-- Conditional Login/Logout -->
+      <li *ngIf="checkAuth" [ngStyle]="{'background-color': bgLogout}" class="cursor-pointer outline-none bg-red-500 p-2 rounded-md">
+        <a (click)="logout()">Logout</a>
+      </li>
+      <li *ngIf="!checkAuth" [ngStyle]="{'background-color': bgLogin}" class="cursor-pointer outline-none bg-red-500 p-2 rounded-md">
+        <a routerLink="/login">Login</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- Cart Component -->
+<app-cart *ngIf="isCartOpen" (close)="toggleCart()"></app-cart>

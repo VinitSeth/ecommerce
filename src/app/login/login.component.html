@@ -1,0 +1,30 @@
+<section class="grid min-h-screen place-items-center p-16 z-50 relative">
+    <div class="w-72  p-4 pt-0 shadow-lg">
+      <header class="flex h-16 items-center justify-between font-bold text-emerald-950">
+        <span>Login</span>
+        <!-- SVG: xmark -->
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        <!-- SVG: xmark -->
+      </header>
+      <form [formGroup]="loginDetails" (ngSubmit)="onSubmit()" class="grid gap-3 ">
+        <!-- Username Input -->
+        <input class="h-10 rounded-sm bg-gray-100/75 px-2 text-emerald-950 placeholder:text-gray-600/70 focus:outline-none focus:ring focus:ring-emerald-400" type="text" placeholder="Enter your username" formControlName="username"/>
+        <!-- Password Input -->
+        <input class="h-10 rounded-sm bg-gray-100/75 px-2 text-emerald-950 placeholder:text-gray-600/70 focus:outline-none focus:ring focus:ring-emerald-400" type="password" placeholder="Enter your password" 
+        formControlName="password"/>
+        <!-- Sign In Button -->
+        <button class="flex h-10 items-center justify-between rounded-sm bg-blue-700 px-2 text-white transition-colors duration-300 hover:bg-blue-800 focus:outline-none focus:ring " type="submit">
+          <span>Sign In</span>
+          <span>
+            <!-- SVG: chevron-right -->
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+            <!-- SVG: chevron-right -->
+          </span>
+        </button>
+      </form>
+    </div>
+  </section>

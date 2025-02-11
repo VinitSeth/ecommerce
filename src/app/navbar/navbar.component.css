@@ -1,0 +1,9 @@
+/* src/app/navbar/navbar.component.css */
+.group:hover .group-hover\:block {
+    display: block;
+  }
+  
+  .group-hover\:block {
+    display: none;
+  }
+  

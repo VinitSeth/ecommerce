@@ -1,0 +1,13 @@
+/* Import Tailwind CSS utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Combine multiple classes for toast positioning and styling */
+.toast-center {
+  @apply fixed  top-0   flex justify-center z-10; /* Center on screen */
+}
+
+.toast-custom-style {
+  @apply bg-red-700 text-white  font-mono  z-10; /* Custom toast styling */
+}

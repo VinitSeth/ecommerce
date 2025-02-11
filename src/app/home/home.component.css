@@ -1,0 +1,16 @@
+/* Custom styles for slider */
+.swiper-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+}
+.swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.swiper-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
