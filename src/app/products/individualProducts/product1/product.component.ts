@@ -16,6 +16,7 @@ export interface Product {
   price: any;
   description: string;
   quantity: any;
+  rating: number;
   // Add other fields as necessary
 }
 
@@ -49,6 +50,10 @@ export class ProductComponent implements OnInit {
     this.http.get(url).subscribe({
       next: (response) => {
         this.data = response;
+        //         // Filter only electronic gadgets based on their category
+        // this.data = {
+        //   products: response.products.filter((item: Product) => item.categoryId === '1')
+        // };
         this.isLoading = false;
         console.log(this.data);
       },
@@ -60,7 +65,7 @@ export class ProductComponent implements OnInit {
   }
 
   addToCart(product: Product) {
-    this.cartService.addToCart(product);  // Use the service to add items to the cart
+    this.cartService.addToCart(product); // Use the service to add items to the cart
     console.log('Cart Items:', this.cartService.cartItems$);
   }
 }
