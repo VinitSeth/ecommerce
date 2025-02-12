@@ -7,7 +7,6 @@ import { apis } from './apis';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { CartService } from '../../../cart/cart.service';
 
-// Define the Product interface if not already defined
 export interface Product {
   id: string;
   title: string;
@@ -17,7 +16,6 @@ export interface Product {
   description: string;
   quantity: any;
   rating: number;
-  // Add other fields as necessary
 }
 
 @Component({
@@ -31,6 +29,7 @@ export class ProductComponent implements OnInit {
   data: any;
   isLoading: boolean = false;
   productId = signal('');
+  searchQuery: string = '';
 
   constructor(private http: HttpClient, private cartService: CartService) {}
 
@@ -44,6 +43,12 @@ export class ProductComponent implements OnInit {
     .subscribe();
 
   ngOnInit() {
+    // search code
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.searchQuery = params['search'] || '';
+      this.fetchProducts();
+    });
+
     console.log(this.productId());
     const url = apis.find((api) => api.productId === this.productId())!?.url;
     this.isLoading = true;
@@ -56,6 +61,28 @@ export class ProductComponent implements OnInit {
         // };
         this.isLoading = false;
         console.log(this.data);
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.error('Error:', error);
+      },
+    });
+  }
+
+  fetchProducts() {
+    const url = apis.find((api) => api.productId === this.productId())!?.url;
+    this.isLoading = true;
+
+    this.http.get(url).subscribe({
+      next: (response) => {
+        this.data = response;
+        // Filter products based on search query
+        if (this.searchQuery) {
+          this.data.products = this.data.products.filter((item: Product) =>
+            item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+          );
+        }
+        this.isLoading = false;
       },
       error: (error) => {
         this.isLoading = false;

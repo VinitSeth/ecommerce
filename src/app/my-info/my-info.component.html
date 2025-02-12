@@ -1,6 +1,11 @@
 <section class="flex flex-col border-none shadow-md mx-56 my-5 p-5">
-  <h1 class="font-mono text-center text-2xl mb-4">Enter Your Details</h1>
-  <form [formGroup]="contactForm" (ngSubmit)="onHandleClick($event)" (keydown.enter)="$event.preventDefault()" class="font-serif">
+  <h1 class="font-mono text-center text-2xl mb-4">Personal Information</h1>
+  <form
+    [formGroup]="contactForm"
+    (ngSubmit)="onHandleClick($event)"
+    (keydown.enter)="$event.preventDefault()"
+    class="font-serif"
+  >
     <div class="flex flex-col mb-4 gap-y-1">
       <label for="name">Name</label>
       <input
@@ -10,7 +15,12 @@
         formControlName="name"
         placeholder="John Doe"
       />
-      <div *ngIf="contactForm.get('name')?.invalid && (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)">
+      <div
+        *ngIf="
+          contactForm.get('name')?.invalid &&
+          (contactForm.get('name')?.dirty || contactForm.get('name')?.touched)
+        "
+      >
         <small class="text-red-500">Name is required.</small>
       </div>
     </div>
@@ -23,7 +33,12 @@
         formControlName="email"
         placeholder="johndoe@gmail.com"
       />
-      <div *ngIf="contactForm.get('email')?.invalid && (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)">
+      <div
+        *ngIf="
+          contactForm.get('email')?.invalid &&
+          (contactForm.get('email')?.dirty || contactForm.get('email')?.touched)
+        "
+      >
         <small class="text-red-500">Enter a valid email address.</small>
       </div>
     </div>
@@ -36,8 +51,16 @@
         formControlName="phoneNo"
         placeholder="+Country code 1234567890"
       />
-      <div *ngIf="contactForm.get('phoneNo')?.invalid && (contactForm.get('phoneNo')?.dirty || contactForm.get('phoneNo')?.touched)">
-        <small class="text-red-500">Enter a valid phone number. (e.g., +1234567890)</small>
+      <div
+        *ngIf="
+          contactForm.get('phoneNo')?.invalid &&
+          (contactForm.get('phoneNo')?.dirty ||
+            contactForm.get('phoneNo')?.touched)
+        "
+      >
+        <small class="text-red-500"
+          >Enter a valid phone number. (e.g., +1234567890)</small
+        >
       </div>
     </div>
     <div class="flex flex-col mb-4 gap-y-1">
@@ -49,7 +72,13 @@
         formControlName="address"
         placeholder="10 Downing Lane, London"
       />
-      <div *ngIf="contactForm.get('address')?.invalid && (contactForm.get('address')?.dirty || contactForm.get('address')?.touched)">
+      <div
+        *ngIf="
+          contactForm.get('address')?.invalid &&
+          (contactForm.get('address')?.dirty ||
+            contactForm.get('address')?.touched)
+        "
+      >
         <small class="text-red-500">Address is required.</small>
       </div>
     </div>

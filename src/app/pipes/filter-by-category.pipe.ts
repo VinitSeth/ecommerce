@@ -3,10 +3,10 @@ import { Product } from '../products/products.component';
 
 @Pipe({
   name: 'filterByCategory',
-  standalone:true
+  standalone: true,
 })
 export class FilterByCategoryPipe implements PipeTransform {
   transform(products: Product[], categoryId: string): Product[] {
-    return products.filter(product => product.categoryId === categoryId);
-  }
+    return products.filter((product) => product.categoryId === categoryId);
+  } //                                            id
 }

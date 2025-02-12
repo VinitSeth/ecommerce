@@ -1,5 +1,5 @@
 <section class="flex bg-blue-500 text-white p-2 justify-between items-center">
-  <!-- Logo Image -->
+  <!-- Logo -->
   <h1>DCX-App Store</h1>
 
   <!-- Search Bar -->
@@ -28,10 +28,22 @@
         <a routerLink="/products" routerLinkActive="active">Products</a>
       </li>
       <li class="cursor-pointer hover:border-b">
-        <a routerLink="/contact" routerLinkActive="active">My Account</a>
+        <a routerLink="/my-info" routerLinkActive="active">My Account</a>
       </li>
-      <li class="cursor-pointer hover:border-b">
+      <!-- <li *ngIf="checkAuth" class="cursor-pointer hover:border-b">
         <a (click)="toggleCart()"><i class="fa-solid fa-cart-shopping"></i></a>
+      </li> -->
+      <li class="cursor-pointer hover:border-b relative">
+        <a (click)="toggleCart()">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <!-- ✅ Display cart count when items are present -->
+          <span
+            *ngIf="cartItemCount > 0"
+            class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2"
+          >
+            {{ cartItemCount }}
+          </span>
+        </a>
       </li>
 
       <!-- Show Logout Button Only When User is Logged In -->
