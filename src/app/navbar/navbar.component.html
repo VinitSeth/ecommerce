@@ -7,15 +7,16 @@
     <input
       type="text"
       [(ngModel)]="searchQuery"
+      (ngModelChange)="searchProducts()"
       placeholder="Search products..."
       class="p-1 text-black border rounded"
     />
-    <button
+    <!-- <button
       (click)="searchProducts()"
       class="bg-white text-blue-500 px-3 py-1 rounded"
     >
       Search
-    </button>
+    </button> -->
   </div>
 
   <!-- Navigation Links -->

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { CartComponent } from '../cart/cart.component';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../cart/cart.service';
+import { ProductService } from '../products/individualProducts/product1/product.service';
 
 @Component({
   selector: 'app-navbar',
@@ -22,14 +23,18 @@ import { CartService } from '../cart/cart.service';
 export class NavbarComponent {
   searchQuery: string = '';
   cartItemCount: number = 0;
+  isCartOpen = false;
+
+  productId: string | null = null;
+
   constructor(
     private authService: AuthService,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private productService: ProductService
   ) {}
   bgLogin: string = 'skyblue';
   bgLogout: string = 'red';
-  isCartOpen = false;
 
   ngOnInit(): void {
     // ✅ Subscribe to cart updates only when user is logged in
@@ -38,6 +43,11 @@ export class NavbarComponent {
       this.cartItemCount = cartItems.length;
     });
     // }
+
+    this.productService.productId$.subscribe((id) => {
+      this.productId = id;
+      console.log('Product ID received:', this.productId);
+    });
   }
 
   get checkAuth() {
@@ -57,7 +67,7 @@ export class NavbarComponent {
 
   searchProducts(): void {
     if (this.searchQuery.trim()) {
-      this.router.navigate(['/products'], {
+      this.router.navigate([`/products/${this.productId}`], {
         queryParams: { search: this.searchQuery },
       });
     }

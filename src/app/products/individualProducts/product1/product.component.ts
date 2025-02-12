@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 import { apis } from './apis';
 import { TruncatePipe } from '../../../pipes/truncate.pipe';
 import { CartService } from '../../../cart/cart.service';
+import { ProductService } from './product.service';
 
 export interface Product {
   id: string;
@@ -26,12 +27,16 @@ export interface Product {
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
+  productId = signal('');
   data: any;
   isLoading: boolean = false;
-  productId = signal('');
   searchQuery: string = '';
 
-  constructor(private http: HttpClient, private cartService: CartService) {}
+  constructor(
+    private http: HttpClient,
+    private cartService: CartService,
+    private productService: ProductService
+  ) {}
 
   private activatedRoute: ActivatedRoute = inject(ActivatedRoute);
 
@@ -43,6 +48,15 @@ export class ProductComponent implements OnInit {
     .subscribe();
 
   ngOnInit() {
+    // categoryId
+    this.activatedRoute.paramMap.subscribe((params) => {
+      const id = params.get('productId');
+      if (id) {
+        this.productId.set(id);
+        this.productService.setProductId(id); // Store productId in service
+      }
+    });
+
     // search code
     this.activatedRoute.queryParams.subscribe((params) => {
       this.searchQuery = params['search'] || '';
@@ -70,18 +84,23 @@ export class ProductComponent implements OnInit {
   }
 
   fetchProducts() {
-    const url = apis.find((api) => api.productId === this.productId())!?.url;
     this.isLoading = true;
+    const url = apis.find((api) => api.productId === this.productId())!?.url;
 
-    this.http.get(url).subscribe({
+    this.http.get<{ products: Product[] }>(url).subscribe({
       next: (response) => {
-        this.data = response;
+        let products = response.products;
+
         // Filter products based on search query
-        if (this.searchQuery) {
-          this.data.products = this.data.products.filter((item: Product) =>
-            item.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+        if (this.searchQuery.trim()) {
+          const query = this.searchQuery.toLowerCase();
+          products = products.filter(
+            (product) =>
+              product.title.toLowerCase().includes(query) ||
+              product.description.toLowerCase().includes(query)
           );
         }
+        this.data = { products };
         this.isLoading = false;
       },
       error: (error) => {

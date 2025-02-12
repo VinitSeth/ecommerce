@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from '../products/products.component';
+import { Product } from '../products/individualProducts/product1/product.component';
 
 @Pipe({
   name: 'filterByCategory',
@@ -8,5 +8,5 @@ import { Product } from '../products/products.component';
 export class FilterByCategoryPipe implements PipeTransform {
   transform(products: Product[], categoryId: string): Product[] {
     return products.filter((product) => product.categoryId === categoryId);
-  } //                                            id
+  }
 }
