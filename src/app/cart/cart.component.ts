@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CartService } from './cart.service';
-import { Product } from '../products/individualProducts/product1/product.component';  // Adjust the import path as needed
+import { Product } from '../products/individualProducts/product1/product.component';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
   templateUrl: './cart.component.html',
   standalone: true,
   imports: [CommonModule],
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
 export class CartComponent implements OnInit {
   cartItems$: Observable<Product[]>;
-  isCartOpen:boolean=true;
+  isCartOpen: boolean = true;
 
   constructor(private cartService: CartService) {
     this.cartItems$ = this.cartService.cartItems$;
@@ -27,12 +27,15 @@ export class CartComponent implements OnInit {
 
   getSubtotal(items: Product[] | null): number {
     if (!items) return 0;
-    return items.reduce((total, item) => total + (item.price || 0) * (item.quantity || 1), 0);
+    return items.reduce(
+      (total, item) => total + (item.price || 0) * (item.quantity || 1),
+      0
+    );
   }
 
   closeCart(): void {
     // Logic to close the cart, e.g., emitting an event or setting a flag
-    this.isCartOpen=false
+    this.isCartOpen = false;
     console.log('Close Cart');
   }
 }

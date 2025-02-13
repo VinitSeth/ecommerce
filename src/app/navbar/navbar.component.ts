@@ -37,12 +37,9 @@ export class NavbarComponent {
   bgLogout: string = 'red';
 
   ngOnInit(): void {
-    // ✅ Subscribe to cart updates only when user is logged in
-    // if (this.checkAuth) {
     this.cartService.cartItems$.subscribe((cartItems) => {
       this.cartItemCount = cartItems.length;
     });
-    // }
 
     this.productService.productId$.subscribe((id) => {
       this.productId = id;
@@ -61,8 +58,9 @@ export class NavbarComponent {
   logout(): void {
     localStorage.clear();
     this.authService.logout();
-    this.router.navigate(['/login']);
-    // this.cartItemCount = 0; // ✅ Reset cart count on logout(happens without even doing it)
+    this.router.navigate(['/login']).then(() => {
+      window.location.href = '/login';
+    });
   }
 
   searchProducts(): void {

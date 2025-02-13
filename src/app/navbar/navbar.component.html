@@ -11,12 +11,6 @@
       placeholder="Search products..."
       class="p-1 text-black border rounded"
     />
-    <!-- <button
-      (click)="searchProducts()"
-      class="bg-white text-blue-500 px-3 py-1 rounded"
-    >
-      Search
-    </button> -->
   </div>
 
   <!-- Navigation Links -->
@@ -31,13 +25,10 @@
       <li class="cursor-pointer hover:border-b">
         <a routerLink="/my-info" routerLinkActive="active">My Account</a>
       </li>
-      <!-- <li *ngIf="checkAuth" class="cursor-pointer hover:border-b">
-        <a (click)="toggleCart()"><i class="fa-solid fa-cart-shopping"></i></a>
-      </li> -->
       <li class="cursor-pointer hover:border-b relative">
         <a (click)="toggleCart()">
           <i class="fa-solid fa-cart-shopping"></i>
-          <!-- ✅ Display cart count when items are present -->
+          <!--  Display cart count when items are present -->
           <span
             *ngIf="cartItemCount > 0"
             class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2"

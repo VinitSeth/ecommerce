@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';

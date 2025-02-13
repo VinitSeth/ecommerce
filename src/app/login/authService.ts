@@ -36,7 +36,6 @@ export class AuthService {
   }
 
   isAuthenticatedUser(): boolean {
-    // Check if token exists in localStorage
     return !!localStorage.getItem(this.authSecretKey);
   }
 
